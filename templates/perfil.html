@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-4">Actualizar Perfil 👤</h2>
+
+<form action="/perfil" method="post">
+    <label>Correo Electrónico:</label>
+    <input type="email" class="form-control" name="email" value="{{ user.email }}" required>
+
+    <label class="mt-3">Nueva Contraseña (opcional):</label>
+    <input type="password" class="form-control" name="password" placeholder="Nueva contraseña">
+
+    <button class="btn btn-primary mt-3" type="submit">Actualizar Datos</button>
+</form>
+{% endblock %}

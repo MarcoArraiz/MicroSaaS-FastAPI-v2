@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-4">Editar Pedido ✏️</h2>
+<form action="/editar/{{ pedido.id }}" method="post">
+    <input class="form-control my-2" type="text" name="cliente" placeholder="Cliente" value="{{ pedido.cliente }}" required>
+    <input class="form-control my-2" type="text" name="producto" placeholder="Producto" value="{{ pedido.producto }}" required>
+    <input class="form-control my-2" type="number" name="cantidad" placeholder="Cantidad" value="{{ pedido.cantidad }}" required>
+
+    <select name="estado" class="form-control my-2">
+        <option value="Pendiente" {% if pedido.estado=="Pendiente" %}selected{% endif %}>Pendiente</option>
+        <option value="Completado" {% if pedido.estado=="Completado" %}selected{% endif %}>Completado</option>
+        <option value="Cancelado" {% if pedido.estado=="Cancelado" %}selected{% endif %}>Cancelado</option>
+    </select>
+
+    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+</form>
+{% endblock %}

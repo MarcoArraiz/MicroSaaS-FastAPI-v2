@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-4">Dashboard Estadístico 📊</h2>
+
+<div class="alert alert-info">
+  <strong>Total de Pedidos: {{ total_pedidos }}</strong>
+</div>
+
+<!-- Gráfico de pedidos mensuales -->
+<canvas id="pedidosMensuales" width="400" height="150"></canvas>
+
+<!-- Gráfico productos más pedidos -->
+<canvas id="productosPedidos" width="400" height="150" class="mt-5"></canvas>
+
+<!-- Gráfico clientes frecuentes -->
+<canvas id="clientesFrecuentes" width="400" height="150" class="mt-5"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+const ctxMensual = document.getElementById('pedidosMensuales').getContext('2d');
+new Chart(ctxMensual, {
+    type: 'bar',
+    data: {
+        labels: {{ meses | safe }},
+        datasets: [{
+            label: 'Pedidos Mensuales',
+            data: {{ cantidad_pedidos_mes | safe }},
+            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        }]
+    }
+});
+
+const ctxProductos = document.getElementById('productosPedidos').getContext('2d');
+new Chart(ctxProductos, {
+    type: 'pie',
+    data: {
+        labels: {{ productos | safe }},
+        datasets: [{
+            label: 'Productos más pedidos',
+            data: {{ cantidad_productos | safe }},
+            backgroundColor: ['#ff6384', '#36a2eb', '#ffce56', '#4bc0c0', '#9966ff'],
+        }]
+    }
+});
+
+const ctxClientes = document.getElementById('clientesFrecuentes').getContext('2d');
+new Chart(ctxClientes, {
+    type: 'pie',
+    data: {
+        labels: {{ clientes | safe }},
+        datasets: [{
+            label: 'Clientes frecuentes',
+            data: {{ cantidad_clientes | safe }},
+            backgroundColor: ['#ff9f40', '#ff6384', '#36a2eb', '#9966ff', '#4bc0c0'],
+        }]
+    }
+});
+</script>
+
+{% endblock %}

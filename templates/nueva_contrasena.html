@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-4">Nueva Contraseña 🔑</h2>
+<form action="/reset-password/{{ token }}" method="post">
+    <label>Nueva Contraseña:</label>
+    <input type="password" class="form-control" name="password" required>
+    <button class="btn btn-primary mt-3">Cambiar contraseña</button>
+</form>
+{% endblock %}

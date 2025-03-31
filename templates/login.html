@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-4">Iniciar Sesión 🔐</h2>
+{% if error %}
+<div class="alert alert-danger">{{ error }}</div>
+{% endif %}
+<form action="/login" method="post">
+    <input class="form-control my-2" type="email" name="email" placeholder="Correo electrónico" required>
+    <input class="form-control my-2" type="password" name="password" placeholder="Contraseña" required>
+    <button type="submit" class="btn btn-primary">Ingresar</button>
+</form>
+<a href="/recuperar" class="mt-3 d-block">¿Olvidaste tu contraseña?</a>
+{% endblock %}

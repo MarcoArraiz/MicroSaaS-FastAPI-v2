@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mt-4">Recuperar Contraseña 📩</h2>
+<form action="/recuperar" method="post">
+    <label>Ingresa tu email para recuperar tu contraseña:</label>
+    <input type="email" class="form-control" name="email" required>
+    <button class="btn btn-primary mt-3">Enviar enlace</button>
+</form>
+{% endblock %}

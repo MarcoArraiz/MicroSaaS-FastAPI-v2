@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="mt-4">Lista de Pedidos 📦</h1>
+
+<table class="table table-striped mt-4">
+    <thead class="table-dark">
+        <tr>
+            <th>ID</th>
+            <th>Cliente</th>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Estado</th>
+            <th>Fecha Creación</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pedido in pedidos %}
+        <tr>
+            <td>{{ pedido.id }}</td>
+            <td>{{ pedido.cliente }}</td>
+            <td>{{ pedido.producto }}</td>
+            <td>{{ pedido.cantidad }}</td>
+
+            <td>
+                <form method="post" action="/cambiar-estado/{{ pedido.id }}" class="d-flex">
+                    <select name="estado" class="form-select form-select-sm">
+                        <option value="Pendiente" {% if pedido.estado=="Pendiente" %}selected{% endif %}>Pendiente
+                        </option>
+                        <option value="Completado" {% if pedido.estado=="Completado" %}selected{% endif %}>Completado
+                        </option>
+                        <option value="Cancelado" {% if pedido.estado=="Cancelado" %}selected{% endif %}>Cancelado
+                        </option>
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary ms-1">Actualizar</button>
+                </form>
+            </td>
+
+            <td>{{ pedido.fecha_creacion.strftime("%Y-%m-%d") }}</td>
+            <td>
+                <a href="/editar/{{ pedido.id }}" class="btn btn-sm btn-warning">Editar</a>
+                <a href="/eliminar/{{ pedido.id }}" class="btn btn-sm btn-danger"
+                    onclick="return confirm('¿Seguro que deseas eliminar este pedido?');">
+                    Eliminar
+                </a>
+            </td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="7" class="text-center">No hay pedidos registrados.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+
+</table>
+{% endblock %}
